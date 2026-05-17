@@ -142,10 +142,10 @@ textarea.form-input{resize:vertical;min-height:100px}
       <div class="hero-badge">Community</div>
       <h1>Some ideas <em>should be movies.</em></h1>
       <p class="hero-sub">Unmade Movies is a public board for story ideas, concepts, and pitches. Browse what people want to see made. Signal demand. Shape culture.</p>
-      <div class="hero-form">
+                <form class="hero-form" id="earlyAccessForm">
         <input type="email" id="email" placeholder="your@email.com" required>
         <button type="submit">Get Early Access</button>
-        </div>
+                  </form>
       </section>
     <section class="explore" id="explore">
       <div class="explore-header"><h2>Explore Ideas</h2></div>
@@ -159,5 +159,38 @@ textarea.form-input{resize:vertical;min-height:100px}
       <p>Unmade Movies is powered by SLAYTER. Ideas submitted here are public and non-confidential. By submitting, you grant SLAYTER a license to display and distribute your idea. No payment is guaranteed. Read our <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>
       <p>2025 SLAYTER Inc. All rights reserved.</p>
       </footer>
+    <script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHYtAgMHLnV9K133J7wcc4UieiQdK0HnlVBD8-8TT6Km_djFJKYTKzWqGTA0e2Zc60/exec';
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('earlyAccessForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = document.getElementById('email').value;
+    var btn = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({email: email, source: 'unmademovies.com'})
+    })
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data.success){
+        btn.textContent = 'You are on the list!';
+        btn.style.background = '#1a5c2a';
+        form.querySelector('input').value = '';
+      } else {
+        btn.textContent = 'Error - try again';
+        btn.disabled = false;
+      }
+    })
+    .catch(function(){
+      btn.textContent = 'Error - try again';
+      btn.disabled = false;
+    });
+  });
+});
+</script>
     </body>
   </html>
