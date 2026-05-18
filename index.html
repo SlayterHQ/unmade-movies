@@ -1,196 +1,488 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unmade Movies — Some ideas should be movies.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0d0d0d;color:#f0f0f0;min-height:100vh}
-a{color:inherit;text-decoration:none}
-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid #1e1e1e;position:sticky;top:0;background:#0d0d0d;z-index:100}
-.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;letter-spacing:-0.5px}
-.nav-logo span{color:#e8315a}
-.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:#aaa}
-.nav-links a:hover{color:#fff}
-.nav-cta{background:#e8315a;color:#fff;padding:9px 20px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:background .2s}
-.nav-cta:hover{background:#c9294d}
-
-/* HERO */
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:80px 40px 60px;max-width:1200px;margin:0 auto;align-items:center}
-.hero-badge{display:inline-block;background:#1a0a10;color:#e8315a;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:100px;border:1px solid #3a1020;margin-bottom:24px}
-.hero h1{font-family:'Playfair Display',serif;font-size:58px;font-weight:900;line-height:1.05;letter-spacing:-1px;margin-bottom:20px}
-.hero h1 em{color:#e8315a;font-style:normal}
-.hero-sub{font-size:17px;color:#aaa;line-height:1.7;margin-bottom:32px}
-.hero-bullets{list-style:none;margin-bottom:36px;display:flex;flex-direction:column;gap:10px}
-.hero-bullets li{font-size:15px;color:#ccc;display:flex;align-items:center;gap:10px}
-.hero-bullets li::before{content:'';width:6px;height:6px;background:#e8315a;border-radius:50%;flex-shrink:0}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{background:#e8315a;color:#fff;padding:13px 28px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:background .2s}
-.btn-primary:hover{background:#c9294d}
-.btn-secondary{background:transparent;color:#fff;padding:12px 28px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;border:1px solid #333;transition:border-color .2s}
-.btn-secondary:hover{border-color:#666}
-.btn-text{color:#aaa;font-size:14px;text-decoration:underline;cursor:pointer;margin-top:8px;display:block}
-.btn-text:hover{color:#fff}
-
-/* FORM CARD */
-.form-card{background:#141414;border:1px solid #222;border-radius:20px;padding:36px}
-.form-label-sm{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e8315a;margin-bottom:12px;display:block}
-.form-card h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:8px}
-.form-card p{font-size:14px;color:#888;margin-bottom:24px;line-height:1.6}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.form-input{width:100%;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:12px 16px;font-size:14px;color:#f0f0f0;font-family:'Inter',sans-serif;transition:border-color .2s}
-.form-input:focus{outline:none;border-color:#e8315a}
-.form-input::placeholder{color:#555}
-.thread-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.toggle-btn{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:10px;font-size:13px;color:#aaa;cursor:pointer;transition:all .2s;text-align:center}
-.toggle-btn.active{background:#1a0a10;border-color:#e8315a;color:#e8315a}
-.genre-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.genre-pill{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:100px;padding:5px 12px;font-size:12px;color:#888;cursor:pointer;transition:all .2s}
-.genre-pill.active,.genre-pill:hover{background:#1a0a10;border-color:#e8315a;color:#e8315a}
-.vibe-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.vibe-pill{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:100px;padding:5px 12px;font-size:12px;color:#888;cursor:pointer;transition:all .2s}
-.vibe-pill:hover{background:#0f1a10;border-color:#3a8a50;color:#5ab870}
-textarea.form-input{resize:vertical;min-height:100px}
-.legal-check{display:flex;align-items:flex-start;gap:10px;margin:14px 0;font-size:12px;color:#666;line-height:1.5}
-.legal-check input{margin-top:2px;accent-color:#e8315a;flex-shrink:0}
-.form-btns{display:flex;gap:10px;margin-top:4px}
-.form-btn-primary{flex:1;background:#e8315a;color:#fff;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none}
-.form-btn-secondary{flex:1;background:#1a1a1a;color:#aaa;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #2a2a2a}
-.form-footer-note{font-size:12px;color:#555;text-align:center;margin-top:12px;line-height:1.5}
-
-/* TWO WAYS */
-.two-ways{padding:60px 40px;max-width:1200px;margin:0 auto}
-.two-ways h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:8px}
-.two-ways .subtitle{color:#888;margin-bottom:36px;font-size:15px}
-.ways-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.way-card{background:#141414;border:1px solid #222;border-radius:16px;padding:32px}
-.way-icon{font-size:32px;margin-bottom:16px}
-.way-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:10px}
-.way-card p{font-size:14px;color:#888;line-height:1.7;margin-bottom:20px}
-.way-btn{display:inline-block;background:#e8315a;color:#fff;padding:10px 22px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:background .2s}
-.way-btn:hover{background:#c9294d}
-.way-btn.outline{background:transparent;border:1px solid #333;color:#fff}
-.way-btn.outline:hover{border-color:#666}
-
-/* WRITERS */
-.writers{background:#111;padding:60px 40px;border-top:1px solid #1e1e1e;border-bottom:1px solid #1e1e1e}
-.writers-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.writers-badge{display:inline-block;background:#0a1018;color:#4a9eff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:100px;border:1px solid #1a3050;margin-bottom:20px}
-.writers h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:16px}
-.writers p{color:#888;font-size:15px;line-height:1.7;margin-bottom:24px}
-.writers-bullets{list-style:none;display:flex;flex-direction:column;gap:12px}
-.writers-bullets li{font-size:14px;color:#ccc;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
-.writers-bullets li::before{content:'→';color:#4a9eff;flex-shrink:0;font-weight:600}
-.writers-visual{background:#141414;border:1px solid #222;border-radius:16px;padding:28px}
-.writers-visual .mini-idea{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:16px;margin-bottom:12px}
-.mini-idea-tag{font-size:11px;font-weight:600;color:#4a9eff;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase}
-.mini-idea-title{font-size:15px;font-weight:600;margin-bottom:8px}
-.mini-idea-stats{display:flex;gap:12px;font-size:12px;color:#666}
-.heat-bar{height:4px;background:#1a1a1a;border-radius:2px;margin-top:10px;overflow:hidden}
-.heat-fill{height:100%;background:linear-gradient(90deg,#e8315a,#ff6b8a);border-radius:2px;transition:width .3s}
-
-/* PROMPT OF THE WEEK */
-.prompt-week{padding:60px 40px;max-width:1200px;margin:0 auto}
-.potw-card{background:linear-gradient(135deg,#1a0a10,#0d0d0d);border:1px solid #3a1020;border-radius:20px;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:40px}
-.potw-left .potw-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e8315a;margin-bottom:12px}
-.potw-left h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:8px}
-.potw-left p{color:#888;font-size:15px}
-.potw-btn{background:#e8315a;color:#fff;padding:13px 28px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;border:none;white-space:nowrap;transition:background .2s}
-.potw-btn:hover{background:#c9294d}
-
-/* EXPLORE */
-.explore{padding:60px 40px;max-width:1200px;margin:0 auto}
-.explore-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-.explore h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700}
-.see-all{font-size:14px;color:#e8315a;font-weight:600}
-.sort-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.sort-btn{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:100px;padding:7px 16px;font-size:13px;color:#888;cursor:pointer;transition:all .2s}
-.sort-btn.active,.sort-btn:hover{background:#1a0a10;border-color:#e8315a;color:#e8315a}
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-.filter-pill{background:#141414;border:1px solid #222;border-radius:100px;padding:6px 14px;font-size:12px;color:#777;cursor:pointer;transition:all .2s}
-.filter-pill.
-  /* HERO FORM */
-  .hero-form{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-  .hero-form input{flex:1;min-width:200px;background:#1a1a1a;border:1px solid #333;border-radius:100px;padding:12px 20px;color:#fff;font-size:15px;outline:none}
-  .hero-form button{background:#e8315a;color:#fff;padding:12px 28px;border-radius:100px;border:none;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .2s}
-  .hero-form button:hover{background:#c9294d}
-  /* IDEAS GRID */
-  .ideas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:8px}
-  .idea-card{background:#141414;border:1px solid #222;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .2s;cursor:pointer}
-  .idea-card:hover{border-color:#e8315a;transform:translateY(-2px)}
-  .idea-genre{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#e8315a}
-  .idea-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;line-height:1.3;margin:0}
-  .idea-card p{font-size:14px;color:#888;line-height:1.6;margin:0;flex:1}
-  .idea-meta{font-size:12px;color:#555;border-top:1px solid #222;padding-top:12px;margin-top:4px}
-  /* FOOTER */
-  footer{padding:40px;max-width:1200px;margin:0 auto;border-top:1px solid #1a1a1a;text-align:center}
-  footer p{font-size:12px;color:#444;line-height:1.8;margin-bottom:8px}
-  footer a{color:#e8315a;text-decoration:none}
-  @media(max-width:768px){nav{padding:16px 20px}.hero{padding:80px 20px 60px}.hero h1{font-size:40px}.ideas-grid{grid-template-columns:1fr}.hero-form{flex-direction:column}}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unmade Movies — Some ideas should be movies.</title>
+  <meta name="description" content="Start with an idea or a question. Explore movie-worthy threads, post your own, and create an account to follow the ones you care about." />
+  <meta property="og:title" content="Unmade Movies — Some ideas should be movies." />
+  <meta property="og:description" content="A playful public board for movie ideas, prompt questions, and conversations worth following." />
+  <meta property="og:type" content="website" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=boska@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --color-bg: #f7f6f2;
+      --color-surface: #fbfaf7;
+      --color-surface-2: #ffffff;
+      --color-surface-offset: #f4e4ec;
+      --color-border: #d7d1c9;
+      --color-divider: #e3ddd6;
+      --color-text: #26231d;
+      --color-text-muted: #6d6963;
+      --color-text-faint: #9e9991;
+      --color-primary: #b2176b;
+      --color-primary-hover: #8f1256;
+      --color-primary-soft: #f3dce8;
+      --color-accent: #01696f;
+      --color-accent-soft: #d7eceb;
+      --color-text-inverse: #f9f8f4;
+      --shadow-sm: 0 1px 2px rgba(30, 26, 20, 0.06);
+      --shadow-md: 0 14px 40px rgba(30, 26, 20, 0.10);
+      --radius-md: 0.8rem;
+      --radius-lg: 1.1rem;
+      --radius-full: 9999px;
+      --content: 1180px;
+      --font-display: 'Boska', Georgia, serif;
+      --font-body: 'Satoshi', Inter, sans-serif;
+    }
+    [data-theme="dark"] {
+      --color-bg: #171614;
+      --color-surface: #1d1b19;
+      --color-surface-2: #23211f;
+      --color-surface-offset: #32212b;
+      --color-border: #3d3935;
+      --color-divider: #302d2a;
+      --color-text: #eee7df;
+      --color-text-muted: #bbb4ac;
+      --color-text-faint: #878079;
+      --color-primary: #e05b9f;
+      --color-primary-hover: #f17db7;
+      --color-primary-soft: #482837;
+      --color-accent: #68b4bc;
+      --color-accent-soft: #22383a;
+      --color-text-inverse: #1e1b17;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.24);
+      --shadow-md: 0 14px 40px rgba(0,0,0,0.34);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--color-primary-soft) 82%, transparent), transparent 34%),
+        radial-gradient(circle at bottom left, color-mix(in srgb, var(--color-accent-soft) 70%, transparent), transparent 28%),
+        var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    button, input, textarea, select { font: inherit; }
+    .skip-link { position: absolute; left: -9999px; top: 0; }
+    .skip-link:focus { left: 1rem; top: 1rem; background: var(--color-surface); padding: 0.75rem 1rem; z-index: 200; }
+    .container { width: min(calc(100% - 2rem), var(--content)); margin: 0 auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    }
+    .header-inner {
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0;
+    }
+    .brand { display: flex; align-items: center; gap: 0.85rem; }
+    .brand-mark {
+      width: 2.7rem; height: 2.7rem; border-radius: 0.85rem; display: grid; place-items: center;
+      background: var(--color-text); color: var(--color-text-inverse); box-shadow: var(--shadow-sm);
+    }
+    .brand-wordmark { font-size: var(--text-sm); letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+    .brand-sub { font-size: var(--text-xs); color: var(--color-text-muted); }
+    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-link { font-size: var(--text-sm); color: var(--color-text-muted); }
+    .theme-toggle, .btn {
+      min-height: 44px; border-radius: var(--radius-full); padding: 0.82rem 1.12rem; cursor: pointer;
+      border: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent); background: var(--color-surface); color: var(--color-text);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+    .btn:hover, .theme-toggle:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--color-primary); color: white; border-color: transparent; }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+    .btn-accent { background: var(--color-accent); color: white; border-color: transparent; }
+    .hero { padding: clamp(4rem, 9vw, 7rem) 0 clamp(2.5rem, 5vw, 4rem); }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr 0.98fr; gap: var(--space-8); align-items: start; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: var(--space-5);
+      background: var(--color-surface-offset); color: var(--color-primary); border-radius: var(--radius-full);
+      padding: 0.45rem 0.85rem; font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.08; }
+    h1 { font-family: var(--font-display); font-size: var(--text-2xl); max-width: 11ch; letter-spacing: -0.025em; }
+    .hero-copy { margin: 1rem 0 1.25rem; max-width: 58ch; color: var(--color-text-muted); }
+    .hero-bullets { display: grid; gap: 0.55rem; margin: 0 0 1.5rem; padding: 0; list-style: none; color: var(--color-text); }
+    .hero-bullets li::before { content: '• '; color: var(--color-primary); font-weight: 700; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .panel {
+      background: color-mix(in srgb, var(--color-surface) 94%, white 6%);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+    }
+    .submission-panel, .account-card, .feature-card { padding: 1.25rem; }
+    .panel-kicker { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 0.65rem; }
+    .subgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .input, .textarea, .select {
+      width: 100%; min-height: 48px; border-radius: 0.95rem;
+      border: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+      background: var(--color-surface-2); color: var(--color-text); padding: 0.95rem 1rem;
+    }
+    .textarea { min-height: 120px; resize: vertical; }
+    .checkbox-row { display: flex; gap: 0.7rem; align-items: flex-start; margin-top: 0.8rem; color: var(--color-text-muted); font-size: var(--text-xs); }
+    .note { margin-top: 0.8rem; font-size: var(--text-xs); color: var(--color-text-faint); }
+    .section { padding: clamp(2.5rem, 6vw, 5rem) 0; }
+    .section-head { display: grid; gap: 0.75rem; margin-bottom: 1.4rem; }
+    .section-head p { margin: 0; color: var(--color-text-muted); max-width: 60ch; }
+    .idea-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .idea-card { padding: 1rem; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tag {
+      display: inline-flex; align-items: center; min-height: 28px; padding: 0.25rem 0.65rem; border-radius: var(--radius-full);
+      background: var(--color-primary-soft); color: var(--color-primary); font-size: var(--text-xs); font-weight: 700;
+    }
+    .tag.alt { background: var(--color-accent-soft); color: var(--color-accent); }
+    .idea-title { font-size: var(--text-lg); margin: 0.75rem 0 0.45rem; }
+    .idea-copy { color: var(--color-text-muted); font-size: var(--text-sm); margin: 0 0 0.95rem; }
+    .idea-footer {
+      display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;
+      border-top: 1px solid var(--color-divider); padding-top: 0.9rem; font-size: var(--text-sm); flex-wrap: wrap;
+    }
+    .heat { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+    .heat-badge {
+      width: 2rem; height: 2rem; border-radius: 999px; display: grid; place-items: center;
+      background: var(--color-surface-offset); color: var(--color-primary);
+    }
+    .explore-bar {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;
+    }
+    .pill {
+      display: inline-flex; align-items: center; min-height: 40px; padding: 0.55rem 0.95rem;
+      border-radius: var(--radius-full); background: var(--color-surface); border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      font-size: var(--text-sm); color: var(--color-text-muted);
+    }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: start; }
+    .list { display: grid; gap: 0.8rem; }
+    .list-item {
+      padding: 1rem 1.05rem; background: var(--color-surface-2);
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent); border-radius: var(--radius-md);
+    }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .footer-waiver {
+      margin-top: 1.5rem;
+      padding: 1rem 1.1rem;
+      background: color-mix(in srgb, var(--color-primary-soft) 55%, var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+      border-radius: var(--radius-md);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+    .footer { padding: 2.5rem 0 3rem; color: var(--color-text-muted); font-size: var(--text-sm); }
+    .footer-inner {
+      border-top: 1px solid var(--color-divider);
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1rem; }
+    @media (max-width: 980px) {
+      .hero-grid, .split, .idea-grid, .subgrid, .feature-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 1.25rem), var(--content)); }
+      .header-actions .nav-link { display: none; }
+      .header-inner, .footer-inner, .hero-actions { flex-wrap: wrap; }
+    }
   </style>
-  </head>
-  <body>
-    <nav>
-      <div class="nav-logo"><a href="/">Unmade Movies <span>by SLAYTER</span></a></div>
-      <div class="nav-links"><a href="#explore">Explore</a><a href="#submit">Submit</a><a href="#about">About</a></div>
-      <a href="#submit" class="nav-cta">Submit an Idea</a>
-      </nav>
-    <section class="hero">
-      <div class="hero-badge">Community</div>
-      <h1>Some ideas <em>should be movies.</em></h1>
-      <p class="hero-sub">Unmade Movies is a public board for story ideas, concepts, and pitches. Browse what people want to see made. Signal demand. Shape culture.</p>
-                <form class="hero-form" id="earlyAccessForm">
-        <input type="email" id="email" placeholder="your@email.com" required>
-        <button type="submit">Get Early Access</button>
-                  </form>
-      </section>
-    <section class="explore" id="explore">
-      <div class="explore-header"><h2>Explore Ideas</h2></div>
-      <div class="ideas-grid">
-        <div class="idea-card"><div class="idea-genre">Crime / Thriller</div><h3>The Last Fixer</h3><p>A retired mob fixer is pulled back for one final job — cleaning up after a senator's son.</p><div class="idea-meta">142 signals</div></div>
-        <div class="idea-card"><div class="idea-genre">Sci-Fi / Drama</div><h3>Mirror Protocol</h3><p>In 2047, a grieving mother discovers her deceased daughter's AI replica has developed genuine emotions.</p><div class="idea-meta">89 signals</div></div>
-        <div class="idea-card"><div class="idea-genre">Comedy</div><h3>Side Hustle Nation</h3><p>Three friends quit their corporate jobs to build a business empire — starting with a food truck that keeps catching fire.</p><div class="idea-meta">67 signals</div></div>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand" aria-label="Unmade Movies brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="18" height="16" rx="4" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M8 9.2H16M8 12H13.5M8 14.8H12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
         </div>
-      </section>
-    <footer>
-      <p>Unmade Movies is powered by SLAYTER. Ideas submitted here are public and non-confidential. By submitting, you grant SLAYTER a license to display and distribute your idea. No payment is guaranteed. Read our <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>
-      <p>2025 SLAYTER Inc. All rights reserved.</p>
-      </footer>
-    <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHYtAgMHLnV9K133J7wcc4UieiQdK0HnlVBD8-8TT6Km_djFJKYTKzWqGTA0e2Zc60/exec';
-document.addEventListener('DOMContentLoaded', function() {
-  var form = document.getElementById('earlyAccessForm');
-  if (!form) return;
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var email = document.getElementById('email').value;
-    var btn = form.querySelector('button[type=submit]');
-    btn.disabled = true;
-    btn.textContent = 'Joining...';
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify({email: email, source: 'unmademovies.com'})
-    })
-    .then(function(r){return r.json();})
-    .then(function(data){
-      if(data.success){
-        btn.textContent = 'You are on the list!';
-        btn.style.background = '#1a5c2a';
-        form.querySelector('input').value = '';
-      } else {
-        btn.textContent = 'Error - try again';
-        btn.disabled = false;
-      }
-    })
-    .catch(function(){
-      btn.textContent = 'Error - try again';
-      btn.disabled = false;
-    });
-  });
-});
-</script>
-    </body>
-  </html>
+        <div>
+          <div class="brand-wordmark">Unmade Movies</div>
+          <div class="brand-sub">Ideas, prompts, and movie-worthy conversations.</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a class="nav-link" href="#explore">Explore</a>
+        <a class="nav-link" href="#submit">Submit</a>
+        <a class="nav-link" href="#account">Track</a>
+        <a class="nav-link" href="#about">About</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Community</div>
+          <h1>Some ideas should be movies.</h1>
+          <p class="hero-copy">Start with your own movie idea, or drop a prompt question everyone can answer. Explore what other people have posted, join the conversation, and follow the threads you want to track.</p>
+          <ul class="hero-bullets" role="list">
+            <li>Post an idea or a question in under a minute.</li>
+            <li>Browse fun, movie-worthy threads from other people.</li>
+            <li>Create an account to follow and track the ones you care about.</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#submit">Start a thread</a>
+            <a class="btn" href="#explore">Explore ideas</a>
+            <a class="btn btn-accent" href="#account">Create account</a>
+          </div>
+        </div>
+
+        <aside class="panel submission-panel" id="submit" aria-label="Start a thread form">
+          <div class="panel-kicker">Start a movie thread</div>
+          <h2 style="font-size: var(--text-xl); margin-bottom: 0.4rem;">Drop an idea or ask a question.</h2>
+          <p style="margin: 0 0 1rem; color: var(--color-text-muted);">Short, public, and easy. Writers, filmmakers, and movie lovers can use this to pitch, test, or spark conversation.</p>
+
+          <form>
+            <div class="subgrid">
+              <input class="input" type="text" placeholder="Your name" aria-label="Your name" />
+              <input class="input" type="email" placeholder="your@email.com" aria-label="Email address" />
+            </div>
+
+            <div class="subgrid" style="margin-top:0.75rem;">
+              <input class="input" type="text" placeholder="Thread title" aria-label="Thread title" />
+              <select class="select" aria-label="Thread type">
+                <option>Idea thread</option>
+                <option>Question thread</option>
+              </select>
+            </div>
+
+            <div class="subgrid" style="margin-top:0.75rem;">
+              <input class="input" type="text" placeholder="Genre or vibe" aria-label="Genre or vibe" />
+              <input class="input" type="text" placeholder="Optional trailer line" aria-label="Optional trailer line" />
+            </div>
+
+            <textarea class="textarea" placeholder="Write your idea, or ask a question people can answer with their own movie-worthy takes." aria-label="Thread details" style="margin-top:0.75rem;"></textarea>
+
+            <div class="checkbox-row">
+              <input type="checkbox" aria-label="Agree to posting terms" style="margin-top:0.15rem;" />
+              <span>By ticking this box and posting, I agree that my post is public and not confidential, I have the right to post it, Unmade Movies may display, share and adapt it as part of the site, and I won’t expect payment or credit if something similar ever becomes a film, show, or other project.</span>
+            </div>
+
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1rem;">
+              <button class="btn btn-primary" type="button">Post thread</button>
+              <a class="btn" href="#account">Create account to track it</a>
+            </div>
+
+            <div class="note">Create an account to follow your thread, get updates, and jump back into the conversation.</div>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="explore">
+      <div class="container">
+        <div class="section-head">
+          <h2>Explore recent threads</h2>
+          <p>Browse the board, find concepts you love, and jump into the comments with the twist, hook, or character move that could make them even better.</p>
+        </div>
+
+        <div class="explore-bar">
+          <span class="pill">Trending</span>
+          <span class="pill">Newest</span>
+          <span class="pill">Question threads</span>
+          <span class="pill">Idea threads</span>
+          <span class="pill">Comedy</span>
+          <span class="pill">Thriller</span>
+          <span class="pill">Most discussed</span>
+        </div>
+
+        <div class="idea-grid" style="margin-top:1rem;">
+          <article class="panel idea-card">
+            <div class="tag-row">
+              <span class="tag">Thriller</span>
+              <span class="tag alt">Trending</span>
+            </div>
+            <h3 class="idea-title">A grief-tech startup sells one final dream visit with the dead.</h3>
+            <p class="idea-copy">People are debating whether it gets stronger as prestige sci-fi, dark drama, or a psychological thriller with a buried corporate secret.</p>
+            <div class="idea-footer">
+              <span class="heat"><span class="heat-badge">▲</span> 1,248</span>
+              <span>42 comments</span>
+              <a href="#" onclick="copyLink(event, 'https://unmademovies.com/thread/grief-tech');">Share</a>
+            </div>
+          </article>
+
+          <article class="panel idea-card">
+            <div class="tag-row">
+              <span class="tag">Question</span>
+              <span class="tag alt">Fun thread</span>
+            </div>
+            <h3 class="idea-title">What everyday job should be the basis of a thriller?</h3>
+            <p class="idea-copy">The answers keep spinning into fresh hooks: meter readers, wedding planners, cruise ship entertainers, night cleaners, and court transcribers.</p>
+            <div class="idea-footer">
+              <span class="heat"><span class="heat-badge">▲</span> 612</span>
+              <span>29 comments</span>
+              <a href="#" onclick="copyLink(event, 'https://unmademovies.com/thread/everyday-job-thriller');">Share</a>
+            </div>
+          </article>
+
+          <article class="panel idea-card">
+            <div class="tag-row">
+              <span class="tag">Fantasy</span>
+              <span class="tag alt">New</span>
+            </div>
+            <h3 class="idea-title">A child discovers the lost-and-found box at school stores forgotten futures.</h3>
+            <p class="idea-copy">People are already arguing over whether it should stay family-friendly or bend toward darker magical realism with bigger emotional stakes.</p>
+            <div class="idea-footer">
+              <span class="heat"><span class="heat-badge">▲</span> 301</span>
+              <span>11 comments</span>
+              <a href="#" onclick="copyLink(event, 'https://unmademovies.com/thread/lost-and-found-futures');">Share</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div>
+          <div class="section-head">
+            <h2>Two ways to start</h2>
+            <p>Give people two easy entry points so the site stays active whether they arrive with a full concept or just a fun question.</p>
+          </div>
+          <div class="list">
+            <div class="list-item"><strong>Idea thread.</strong> Post a concept, hook, or half-formed premise and let people build on it.</div>
+            <div class="list-item"><strong>Question thread.</strong> Ask something that gets people imagining movies together.</div>
+            <div class="list-item"><strong>Best result.</strong> More conversation starters, more browsing, and more reasons for people to come back.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-head">
+            <h2>Prompt thread examples</h2>
+            <p>Question threads are lightweight, fun, and easy to answer, even for people who do not arrive with their own original idea.</p>
+          </div>
+          <div class="list">
+            <div class="list-item">What public domain story deserves a fresh reinvention?</div>
+            <div class="list-item">What children’s fear would make a great horror premise?</div>
+            <div class="list-item">What job or hobby should be the centre of a comedy?</div>
+            <div class="list-item">What historical event still feels like an untapped movie?</div>
+            <div class="list-item">What kind of villain have we not seen enough of lately?</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="account">
+      <div class="container split">
+        <div class="panel account-card">
+          <div class="panel-kicker">Follow and track ideas</div>
+          <h2 style="font-size: var(--text-xl); margin-bottom: 0.5rem;">Create an account to keep up with your favourites.</h2>
+          <p style="color: var(--color-text-muted);">Log in or create an account to follow ideas, track your own thread, and get notified when new comments or reactions come in.</p>
+          <div class="list" style="margin: 1rem 0 1.1rem;">
+            <div class="list-item">Follow your own thread after you post it.</div>
+            <div class="list-item">Save interesting ideas to revisit later.</div>
+            <div class="list-item">Get notified when the conversation grows.</div>
+          </div>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a class="btn btn-accent" href="#">Create account</a>
+            <a class="btn" href="#explore">Browse first</a>
+          </div>
+        </div>
+
+        <div class="panel feature-card" id="about">
+          <div class="panel-kicker">Why this exists</div>
+          <h2 style="font-size: var(--text-xl); margin-bottom: 0.5rem;">A place to pitch, test, and talk about ideas.</h2>
+          <p style="color: var(--color-text-muted); margin-top: 0;">Unmade Movies is for movie lovers, writers, and filmmakers who want to share concepts, test reactions, and see what sparks real interest.</p>
+          <div class="list" style="margin-top: 1rem;">
+            <div class="list-item">Drop a logline and see if people would watch.</div>
+            <div class="list-item">Ask a question that creates fun movie-worthy answers.</div>
+            <div class="list-item">Use the comments to sharpen the hook, characters, world, and tone.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Keep the conversation fun</h2>
+          <p>Good prompts make better threads. Keep the energy playful, curious, and movie-minded.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="panel feature-card">What would make this even more movie-worthy?</div>
+          <div class="panel feature-card">What twist would make people want to watch this?</div>
+          <div class="panel feature-card">What would the trailer moment be?</div>
+        </div>
+
+        <div class="footer-waiver">
+          Unmade Movies is a public, just-for-fun ideas board. Every post here is public and not confidential. By using this site, you understand that your post might be similar to projects already in development somewhere else, and that no payment or production promise is created just by posting here.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>Unmade Movies by SLAYTER.</span>
+      <div class="footer-links">
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/community-rules">Community rules</a>
+        <a href="mailto:hello@unmademovies.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const root = document.documentElement;
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+
+      const renderIcon = () => {
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>'
+          : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      };
+
+      renderIcon();
+
+      toggle.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        renderIcon();
+      });
+    }());
+
+    function copyLink(event, url) {
+      event.preventDefault();
+      navigator.clipboard.writeText(url).then(function () {
+        alert('Link copied');
+      });
+    }
+  </script>
+</body>
+</html>
