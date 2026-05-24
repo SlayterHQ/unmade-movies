@@ -1,224 +1,755 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unmade Movies — Some ideas should be movies.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#f0f0f0;min-height:100vh}
-a{color:inherit;text-decoration:none}
-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid #1e1e1e;position:sticky;top:0;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);z-index:100}
-.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;letter-spacing:-0.5px}
-.nav-logo span{background:linear-gradient(90deg,#e8315a,#ff6b2b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500;color:#aaa}
-.nav-links a:hover{color:#fff}
-.nav-cta{background:linear-gradient(135deg,#ff6b2b,#e8315a);color:#fff;padding:9px 20px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:opacity .2s}
-.nav-cta:hover{opacity:0.85}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unmade Movies — Some ideas should be movies.</title>
+  <meta name="description" content="A public community board for movie-worthy ideas, prompts, and conversation." />
+  <meta property="og:title" content="Unmade Movies — Some ideas should be movies." />
+  <meta property="og:description" content="Start with an idea or a question. Explore movie-worthy threads, post your own, and follow the ones you care about." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',sans-serif;
+      background:#000;
+      color:#fff;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
 
-/* HERO */
-.hero-wrapper{background:linear-gradient(135deg,#1a0010 0%,#2d0020 30%,#0a0a0a 70%,#0a0a0a 100%);position:relative;overflow:hidden}
-.hero-wrapper::before{content:'';position:absolute;top:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,49,90,0.18) 0%,transparent 70%);pointer-events:none}
-.hero-wrapper::after{content:'';position:absolute;bottom:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,107,43,0.1) 0%,transparent 70%);pointer-events:none}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:80px 40px 60px;max-width:1200px;margin:0 auto;align-items:center;position:relative;z-index:1}
-.hero-badge{display:inline-block;background:rgba(232,49,90,0.15);color:#e8315a;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:100px;border:1px solid rgba(232,49,90,0.3);margin-bottom:24px}
-.hero h1{font-family:'Playfair Display',serif;font-size:58px;font-weight:900;line-height:1.05;letter-spacing:-1px;margin-bottom:20px}
-.hero h1 em{background:linear-gradient(90deg,#e8315a,#ff6b2b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
-.hero-sub{font-size:17px;color:#aaa;line-height:1.7;margin-bottom:32px}
-.hero-bullets{list-style:none;margin-bottom:36px;display:flex;flex-direction:column;gap:10px}
-.hero-bullets li{font-size:15px;color:#ccc;display:flex;align-items:center;gap:10px}
-.hero-bullets li::before{content:'';width:6px;height:6px;background:linear-gradient(135deg,#e8315a,#ff6b2b);border-radius:50%;flex-shrink:0}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{background:linear-gradient(135deg,#ff6b2b,#e8315a);color:#fff;padding:13px 28px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:opacity .2s;white-space:nowrap}
-.btn-primary:hover{opacity:0.85}
-.btn-secondary{background:transparent;color:#fff;padding:12px 28px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;border:1px solid #333;transition:border-color .2s}
-.btn-secondary:hover{border-color:#666}
-.btn-text{color:#aaa;font-size:14px;text-decoration:underline;cursor:pointer;margin-top:8px;display:block}
-.btn-text:hover{color:#fff}
+    nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:18px 40px;
+      background:rgba(0,0,0,0.72);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo{
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff;
+      white-space:nowrap;
+    }
+    .nav-logo span{
+      color:#777;
+      font-weight:600;
+      letter-spacing:.04em;
+      text-transform:none;
+      margin-left:6px;
+    }
+    .nav-links{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      margin-left:auto;
+    }
+    .nav-links a{
+      font-size:14px;
+      color:#999;
+      transition:color .2s ease;
+    }
+    .nav-links a:hover{color:#fff}
+    .nav-cta{
+      background:linear-gradient(135deg,#ff6b2b,#e40582);
+      color:#fff;
+      border:none;
+      border-radius:999px;
+      padding:12px 20px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:transform .2s ease,opacity .2s ease;
+      white-space:nowrap;
+    }
+    .nav-cta:hover{opacity:.9;transform:translateY(-1px)}
 
-/* FORM CARD */
-.form-card{background:#141414;border:1px solid #222;border-radius:20px;padding:36px}
-.form-label-sm{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(90deg,#e8315a,#ff6b2b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;display:block}
-.form-card h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:8px}
-.form-card p{font-size:14px;color:#888;margin-bottom:24px;line-height:1.6}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.form-input{width:100%;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:12px 16px;font-size:14px;color:#f0f0f0;font-family:'Inter',sans-serif;transition:border-color .2s}
-.form-input:focus{outline:none;border-color:#e8315a}
-.form-input::placeholder{color:#555}
-.thread-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.toggle-btn{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:10px;font-size:13px;color:#aaa;cursor:pointer;transition:all .2s;text-align:center}
-.toggle-btn.active{background:rgba(232,49,90,0.12);border-color:#e8315a;color:#e8315a}
-.genre-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.genre-pill{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:100px;padding:5px 12px;font-size:12px;color:#888;cursor:pointer;transition:all .2s}
-.genre-pill.active,.genre-pill:hover{background:rgba(232,49,90,0.12);border-color:#e8315a;color:#e8315a}
-.vibe-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.vibe-pill{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:100px;padding:5px 12px;font-size:12px;color:#888;cursor:pointer;transition:all .2s}
-.vibe-pill:hover{background:rgba(255,107,43,0.1);border-color:#ff6b2b;color:#ff6b2b}
-textarea.form-input{resize:vertical;min-height:100px}
-.legal-check{display:flex;align-items:flex-start;gap:10px;margin:14px 0;font-size:12px;color:#666;line-height:1.5}
-.legal-check input{margin-top:2px;accent-color:#e8315a;flex-shrink:0}
-.form-btns{display:flex;gap:10px;margin-top:4px}
-.form-btn-primary{flex:1;background:linear-gradient(135deg,#ff6b2b,#e8315a);color:#fff;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:none}
-.form-btn-primary:hover{opacity:0.85}
-.form-btn-secondary{flex:1;background:#1a1a1a;color:#aaa;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #2a2a2a}
-.form-footer-note{font-size:12px;color:#555;text-align:center;margin-top:12px;line-height:1.5}
-/* TWO WAYS */
-.two-ways{padding:60px 40px;max-width:1200px;margin:0 auto}
-.two-ways h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:8px}
-.two-ways .subtitle{color:#888;margin-bottom:36px;font-size:15px}
-.ways-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.way-card{background:#141414;border:1px solid #222;border-radius:16px;padding:32px}
-.way-icon{font-size:32px;margin-bottom:16px}
-.way-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:10px}
-.way-card p{font-size:14px;color:#888;line-height:1.7;margin-bottom:20px}
-.way-btn{display:inline-block;background:linear-gradient(135deg,#ff6b2b,#e8315a);color:#fff;padding:10px 22px;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:opacity .2s}
-.way-btn:hover{opacity:0.85}
-.way-btn.outline{background:transparent;border:1px solid #333;color:#fff}
-.way-btn.outline:hover{border-color:#666}
-/* WRITERS */
-.writers{background:#111;padding:60px 40px;border-top:1px solid #1e1e1e;border-bottom:1px solid #1e1e1e}
-.writers-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.writers-badge{display:inline-block;background:#0a1018;color:#4a9eff;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:100px;border:1px solid #1a3050;margin-bottom:20px}
-.writers h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;margin-bottom:16px}
-.writers p{color:#888;font-size:15px;line-height:1.7;margin-bottom:24px}
-.writers-bullets{list-style:none;display:flex;flex-direction:column;gap:12px}
-.writers-bullets li{font-size:14px;color:#ccc;display:flex;align-items:flex-start;gap:10px;line-height:1.6}
-.writers-bullets li::before{content:'→';color:#4a9eff;flex-shrink:0;font-weight:600}
-.writers-visual{background:#141414;border:1px solid #222;border-radius:16px;padding:28px}
-.writers-visual .mini-idea{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:10px;padding:16px;margin-bottom:12px}
-.mini-idea-tag{font-size:11px;font-weight:600;color:#4a9eff;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase}
-.mini-idea-title{font-size:15px;font-weight:600;margin-bottom:8px}
-.mini-idea-stats{display:flex;gap:12px;font-size:12px;color:#666}
-.heat-bar{height:4px;background:#1a1a1a;border-radius:2px;margin-top:10px;overflow:hidden}
-.heat-fill{height:100%;background:linear-gradient(90deg,#e8315a,#ff6b2b);border-radius:2px;transition:width .3s}
-/* PROMPT OF THE WEEK */
-.prompt-week{padding:60px 40px;max-width:1200px;margin:0 auto}
-.potw-card{background:linear-gradient(135deg,#1a0010,#0d0d0d);border:1px solid rgba(232,49,90,0.3);border-radius:20px;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:40px}
-.potw-left .potw-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e8315a;margin-bottom:12px}
-.potw-left h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:8px}
-.potw-left p{color:#888;font-size:15px}
-.potw-btn{background:linear-gradient(135deg,#ff6b2b,#e8315a);color:#fff;padding:13px 28px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;border:none;white-space:nowrap;transition:opacity .2s}
-.potw-btn:hover{opacity:0.85}
-/* EXPLORE */
-.explore{padding:60px 40px;max-width:1200px;margin:0 auto}
-.explore-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-.explore h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700}
-.see-all{font-size:14px;color:#e8315a;font-weight:600}
-.sort-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.sort-btn{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:100px;padding:7px 16px;font-size:13px;color:#888;cursor:pointer;transition:all .2s}
-.sort-btn.active,.sort-btn:hover{background:rgba(232,49,90,0.12);border-color:#e8315a;color:#e8315a}
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-.filter-pill{background:#141414;border:1px solid #222;border-radius:100px;padding:6px 14px;font-size:12px;color:#777;cursor:pointer;transition:all .2s}
-/* HERO FORM */
-.hero-form{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-.hero-form input{flex:1;min-width:200px;background:#1a1a1a;border:1px solid #333;border-radius:100px;padding:12px 20px;color:#fff;font-size:15px;outline:none}
-.hero-form button{background:linear-gradient(135deg,#ff6b2b,#e8315a);color:#fff;padding:12px 28px;border-radius:100px;border:none;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .2s}
-.hero-form button:hover{opacity:0.85}
-/* IDEAS GRID */
-.ideas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:8px}
-.idea-card{background:#141414;border:1px solid #222;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,transform .2s;cursor:pointer}
-.idea-card:hover{border-color:#e8315a;transform:translateY(-2px)}
-.idea-genre{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#e8315a}
-.idea-card h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;line-height:1.3;margin:0}
-.idea-card p{font-size:14px;color:#888;line-height:1.6;margin:0;flex:1}
-.idea-meta{font-size:12px;color:#555;border-top:1px solid #222;padding-top:12px;margin-top:4px}
-/* FOOTER */
-footer{padding:40px;max-width:1200px;margin:0 auto;border-top:1px solid #1a1a1a;text-align:center}
-footer p{font-size:12px;color:#444;line-height:1.8;margin-bottom:8px}
-footer a{color:#e8315a;text-decoration:none}
-@media(max-width:768px){nav{padding:16px 20px}.hero-wrapper .hero{padding:60px 20px 40px}.hero h1{font-size:40px}.ideas-grid{grid-template-columns:1fr}.hero-form{flex-direction:column}}
-</style>
+    .hero-wrapper{
+      background:
+        radial-gradient(ellipse 75% 55% at 0% 0%, rgba(228,5,130,0.18), transparent 60%),
+        radial-gradient(ellipse 55% 45% at 100% 0%, rgba(245,130,30,0.12), transparent 60%),
+        #000;
+    }
+    .hero{
+      max-width:1200px;
+      margin:0 auto;
+      padding:92px 40px 72px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:42px;
+      align-items:center;
+    }
+    .hero-badge{
+      display:inline-block;
+      background:rgba(228,5,130,0.12);
+      color:#ff5ca8;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      padding:7px 14px;
+      border-radius:999px;
+      border:1px solid rgba(228,5,130,0.28);
+      margin-bottom:22px;
+    }
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:72px;
+      line-height:.96;
+      letter-spacing:-.03em;
+      font-weight:800;
+      margin-bottom:18px;
+      max-width:10ch;
+    }
+    .hero h1 em{
+      font-style:italic;
+      color:#ff7ab9;
+    }
+    .hero-sub{
+      max-width:58ch;
+      color:#a1a1aa;
+      font-size:18px;
+      line-height:1.7;
+      margin-bottom:18px;
+    }
+    .hero-points{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:30px;
+    }
+    .hero-points li{
+      font-size:15px;
+      color:#d4d4d8;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+    }
+    .hero-points li::before{
+      content:'•';
+      color:#e40582;
+      font-weight:700;
+      line-height:1.2;
+    }
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:28px;
+    }
+    .hero-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:12px 22px;
+      border-radius:999px;
+      font-size:15px;
+      font-weight:700;
+      border:1px solid transparent;
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .hero-btn.primary{
+      background:linear-gradient(135deg,#ff6b2b,#e40582);
+      color:#fff;
+    }
+    .hero-btn.primary:hover{opacity:.9;transform:translateY(-1px)}
+    .hero-btn.secondary{
+      background:#111;
+      border-color:#262626;
+      color:#fff;
+    }
+    .hero-btn.secondary:hover{border-color:#444}
+    .hero-form-card{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:22px;
+      padding:28px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.35);
+    }
+    .hero-form-card .eyebrow{
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#ff5ca8;
+      margin-bottom:10px;
+    }
+    .hero-form-card h2{
+      font-family:'Playfair Display',serif;
+      font-size:34px;
+      line-height:1.05;
+      margin-bottom:10px;
+    }
+    .hero-form-card p{
+      color:#8f8f95;
+      font-size:15px;
+      line-height:1.7;
+      margin-bottom:18px;
+    }
+    .thread-form{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .thread-form .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .thread-form input,
+    .thread-form select,
+    .thread-form textarea{
+      width:100%;
+      background:#111;
+      border:1px solid #2a2a2a;
+      border-radius:14px;
+      padding:14px 16px;
+      color:#fff;
+      font-size:14px;
+      outline:none;
+    }
+    .thread-form textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+    .thread-form input:focus,
+    .thread-form select:focus,
+    .thread-form textarea:focus{
+      border-color:#e40582;
+      box-shadow:0 0 0 3px rgba(228,5,130,0.12);
+    }
+    .checkbox-row{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-size:12px;
+      color:#8a8a90;
+      line-height:1.6;
+      margin-top:2px;
+    }
+    .checkbox-row input{
+      width:16px;
+      height:16px;
+      margin-top:2px;
+      accent-color:#e40582;
+      flex-shrink:0;
+    }
+    .form-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:4px;
+    }
+    .form-note{
+      font-size:12px;
+      color:#666;
+      margin-top:2px;
+    }
+
+    .section{
+      padding:64px 40px;
+    }
+    .section-inner{
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:28px;
+    }
+    .section-head h2{
+      font-family:'Playfair Display',serif;
+      font-size:40px;
+      line-height:1;
+    }
+    .section-head p{
+      color:#888;
+      max-width:58ch;
+      font-size:15px;
+    }
+    .see-all{
+      font-size:14px;
+      color:#e40582;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .explore{background:#050505}
+    .sort-bar{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .sort-btn{
+      background:#111;
+      border:1px solid #262626;
+      border-radius:999px;
+      padding:8px 15px;
+      font-size:13px;
+      color:#888;
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .sort-btn.active,.sort-btn:hover{
+      background:rgba(228,5,130,0.12);
+      border-color:#e40582;
+      color:#ff5ca8;
+    }
+    .ideas-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:24px;
+    }
+    .idea-card{
+      background:#111;
+      border:1px solid #222;
+      border-radius:18px;
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      transition:border-color .2s ease,transform .2s ease;
+    }
+    .idea-card:hover{
+      border-color:#e40582;
+      transform:translateY(-2px);
+    }
+    .idea-tags{display:flex;gap:8px;flex-wrap:wrap}
+    .idea-tag{
+      display:inline-flex;
+      align-items:center;
+      padding:5px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      background:rgba(228,5,130,0.12);
+      color:#ff5ca8;
+      border:1px solid rgba(228,5,130,0.22);
+    }
+    .idea-tag.alt{
+      background:rgba(74,158,255,0.1);
+      color:#6cabff;
+      border-color:rgba(74,158,255,0.22);
+    }
+    .idea-card h3{
+      font-family:'Playfair Display',serif;
+      font-size:24px;
+      line-height:1.2;
+      margin:0;
+    }
+    .idea-card p{
+      font-size:14px;
+      color:#8f8f95;
+      line-height:1.7;
+      flex:1;
+    }
+    .idea-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border-top:1px solid #222;
+      padding-top:12px;
+      color:#666;
+      font-size:12px;
+      flex-wrap:wrap;
+    }
+    .share-link{
+      color:#e40582;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+    }
+    .panel{
+      background:#111;
+      border:1px solid #222;
+      border-radius:20px;
+      padding:28px;
+    }
+    .panel .label{
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#ff5ca8;
+      margin-bottom:10px;
+    }
+    .panel h3{
+      font-family:'Playfair Display',serif;
+      font-size:30px;
+      line-height:1.08;
+      margin-bottom:12px;
+    }
+    .panel p{
+      font-size:15px;
+      color:#888;
+      line-height:1.7;
+      margin-bottom:18px;
+    }
+    .bullet-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .bullet-list li{
+      background:#151515;
+      border:1px solid #242424;
+      border-radius:14px;
+      padding:14px 16px;
+      font-size:14px;
+      color:#d4d4d8;
+      line-height:1.6;
+    }
+
+    .prompt-week{background:#080808}
+    .potw-card{
+      max-width:1200px;
+      margin:0 auto;
+      background:linear-gradient(135deg,#1a0010,#0d0d0d);
+      border:1px solid rgba(228,5,130,0.28);
+      border-radius:24px;
+      padding:40px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:30px;
+    }
+    .potw-label{
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#e40582;
+      margin-bottom:12px;
+    }
+    .potw-card h2{
+      font-family:'Playfair Display',serif;
+      font-size:32px;
+      line-height:1.1;
+      margin-bottom:8px;
+    }
+    .potw-card p{
+      color:#8f8f95;
+      font-size:15px;
+    }
+    .potw-btn{
+      background:linear-gradient(135deg,#ff6b2b,#e40582);
+      color:#fff;
+      padding:14px 26px;
+      border-radius:999px;
+      font-size:15px;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+
+    .footer-waiver{
+      max-width:1200px;
+      margin:0 auto;
+      padding:20px 24px;
+      border:1px solid rgba(228,5,130,0.18);
+      background:rgba(228,5,130,0.06);
+      color:#a1a1aa;
+      border-radius:18px;
+      font-size:13px;
+      line-height:1.75;
+    }
+    footer{
+      padding:40px;
+      max-width:1200px;
+      margin:0 auto;
+      border-top:1px solid #1a1a1a;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    footer p{
+      font-size:12px;
+      color:#555;
+      line-height:1.8;
+    }
+    .footer-links{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    footer a{color:#e40582}
+
+    @media(max-width:980px){
+      .hero,
+      .two-col,
+      .thread-form .row{
+        grid-template-columns:1fr;
+      }
+      .hero h1{font-size:56px}
+      .section-head{flex-direction:column;align-items:flex-start}
+      .potw-card{flex-direction:column;align-items:flex-start}
+    }
+    @media(max-width:768px){
+      nav{padding:16px 20px}
+      .nav-links{display:none}
+      .hero{padding:68px 20px 48px}
+      .section{padding:52px 20px}
+      .hero h1{font-size:42px}
+      .potw-card{padding:28px}
+      footer{padding:32px 20px}
+      .footer-waiver{margin:0 20px}
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <a href="/" class="nav-logo">Unmade Movies <span>by SLAYTER</span></a>
-  <div class="nav-links">
-    <a href="#explore">Explore</a>
-    <a href="#submit">Submit</a>
-    <a href="#about">About</a>
-  </div>
-  <button class="nav-cta" onclick="document.getElementById('submit').scrollIntoView({behavior:'smooth'})">Submit an Idea</button>
-</nav>
+  <nav>
+    <a href="/" class="nav-logo">Unmade Movies <span>by SLAYTER</span></a>
+    <div class="nav-links">
+      <a href="#explore">Explore</a>
+      <a href="#submit">Submit</a>
+      <a href="#account">Track</a>
+      <a href="#about">About</a>
+    </div>
+    <button class="nav-cta" onclick="document.getElementById('submit').scrollIntoView({behavior:'smooth'})">Start a Thread</button>
+  </nav>
 
-<div class="hero-wrapper">
-  <div class="hero">
-    <div class="hero-left">
-      <span class="hero-badge">Community</span>
-      <h1>Some ideas <em>should be movies.</em></h1>
-      <p class="hero-sub">Unmade Movies is a public board for story ideas, concepts, and pitches. Browse what people want to see made. Signal demand. Shape culture.</p>
-      <form class="hero-form" id="earlyAccessForm">
-        <input type="email" id="email" placeholder="your@email.com" required>
-        <button type="submit">Get Early Access</button>
-      </form>
+  <div class="hero-wrapper">
+    <section class="hero">
+      <div class="hero-left">
+        <span class="hero-badge">Community</span>
+        <h1>Some ideas <em>should be movies.</em></h1>
+        <p class="hero-sub">Start with your own movie idea, or drop a prompt question everyone can answer. Explore what other people have posted, join the conversation, and follow the threads you want to track.</p>
+        <ul class="hero-points">
+          <li>Post an idea or a question in under a minute.</li>
+          <li>Browse fun, movie-worthy threads from other people.</li>
+          <li>Create an account to follow and track the ones you care about.</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="hero-btn primary" href="#submit">Start a Thread</a>
+          <a class="hero-btn secondary" href="#explore">Explore Ideas</a>
+        </div>
+      </div>
+
+      <div class="hero-form-card" id="submit">
+        <div class="eyebrow">Start a movie thread</div>
+        <h2>Drop an idea or ask a question.</h2>
+        <p>Short, public, and easy. Writers, filmmakers, and movie lovers can use this to pitch, test, or spark conversation.</p>
+
+        <form class="thread-form">
+          <div class="row">
+            <input type="text" placeholder="Your name" aria-label="Your name">
+            <input type="email" placeholder="your@email.com" aria-label="Email address">
+          </div>
+
+          <div class="row">
+            <input type="text" placeholder="Thread title" aria-label="Thread title">
+            <select aria-label="Thread type">
+              <option>Idea thread</option>
+              <option>Question thread</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <input type="text" placeholder="Genre or vibe" aria-label="Genre or vibe">
+            <input type="text" placeholder="Optional trailer line" aria-label="Optional trailer line">
+          </div>
+
+          <textarea placeholder="Write your idea, or ask a question people can answer with their own movie-worthy takes." aria-label="Thread details"></textarea>
+
+          <label class="checkbox-row">
+            <input type="checkbox">
+            <span>By ticking this box and posting, I agree that my post is public and not confidential, I have the right to post it, Unmade Movies may display, share and adapt it as part of the site, and I won’t expect payment or credit if something similar ever becomes a film, show, or other project.</span>
+          </label>
+
+          <div class="form-actions">
+            <button class="hero-btn primary" type="button">Post Thread</button>
+            <a class="hero-btn secondary" href="#account">Create Account to Track It</a>
+          </div>
+
+          <div class="form-note">Create an account to follow your thread, get updates, and jump back into the conversation.</div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <section class="prompt-week">
+    <div class="potw-card">
+      <div>
+        <div class="potw-label">Prompt of the week</div>
+        <h2>What everyday job should be the basis of a thriller?</h2>
+        <p>Question threads are a fast way to get people participating even if they do not arrive with a fully formed idea.</p>
+      </div>
+      <button class="potw-btn" onclick="document.getElementById('submit').scrollIntoView({behavior:'smooth'})">Answer this Prompt</button>
     </div>
-    <div class="hero-right">
+  </section>
+
+  <section class="section explore" id="explore">
+    <div class="section-inner">
+      <div class="section-head">
+        <div>
+          <h2>Explore Ideas</h2>
+          <p>Browse the board, find concepts you love, and jump into the comments with the twist, hook, or character move that could make them even better.</p>
+        </div>
+        <a href="#" class="see-all">See all</a>
+      </div>
+
+      <div class="sort-bar">
+        <button class="sort-btn active">Trending</button>
+        <button class="sort-btn">Newest</button>
+        <button class="sort-btn">Question threads</button>
+        <button class="sort-btn">Idea threads</button>
+        <button class="sort-btn">Comedy</button>
+        <button class="sort-btn">Thriller</button>
+        <button class="sort-btn">Most discussed</button>
+      </div>
+
+      <div class="ideas-grid">
+        <article class="idea-card">
+          <div class="idea-tags">
+            <span class="idea-tag">Thriller</span>
+            <span class="idea-tag alt">Trending</span>
+          </div>
+          <h3>A grief-tech startup sells one final dream visit with the dead.</h3>
+          <p>People are debating whether it gets stronger as prestige sci-fi, dark drama, or a psychological thriller with a buried corporate secret.</p>
+          <div class="idea-meta">
+            <span>▲ 1,248 · 42 comments</span>
+            <a class="share-link" href="#" onclick="copyLink(event,'https://unmademovies.com/thread/grief-tech')">Share</a>
+          </div>
+        </article>
+
+        <article class="idea-card">
+          <div class="idea-tags">
+            <span class="idea-tag">Question</span>
+            <span class="idea-tag alt">Fun thread</span>
+          </div>
+          <h3>What everyday job should be the basis of a thriller?</h3>
+          <p>The answers keep spinning into fresh hooks: meter readers, wedding planners, cruise ship entertainers, night cleaners, and court transcribers.</p>
+          <div class="idea-meta">
+            <span>▲ 612 · 29 comments</span>
+            <a class="share-link" href="#" onclick="copyLink(event,'https://unmademovies.com/thread/everyday-job-thriller')">Share</a>
+          </div>
+        </article>
+
+        <article class="idea-card">
+          <div class="idea-tags">
+            <span class="idea-tag">Fantasy</span>
+            <span class="idea-tag alt">New</span>
+          </div>
+          <h3>A child discovers the lost-and-found box at school stores forgotten futures.</h3>
+          <p>People are already arguing over whether it should stay family-friendly or bend toward darker magical realism with bigger emotional stakes.</p>
+          <div class="idea-meta">
+            <span>▲ 301 · 11 comments</span>
+            <a class="share-link" href="#" onclick="copyLink(event,'https://unmademovies.com/thread/lost-and-found-futures')">Share</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-inner two-col">
+      <div class="panel">
+        <div class="label">Two ways to start</div>
+        <h3>Post a concept or start a prompt.</h3>
+        <p>Give people two easy entry points so the site stays active whether they arrive with a full concept or just a fun question.</p>
+        <ul class="bullet-list">
+          <li><strong>Idea thread.</strong> Post a concept, hook, or half-formed premise and let people build on it.</li>
+          <li><strong>Question thread.</strong> Ask something that gets people imagining movies together.</li>
+          <li><strong>Best result.</strong> More conversation starters, more browsing, and more reasons for people to come back.</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="account">
+        <div class="label">Follow and track ideas</div>
+        <h3>Create an account to keep up with your favourites.</h3>
+        <p>Log in or create an account to follow ideas, track your own thread, and get notified when new comments or reactions come in.</p>
+        <ul class="bullet-list">
+          <li>Follow your own thread after you post it.</li>
+          <li>Save interesting ideas to revisit later.</li>
+          <li>Get notified when the conversation grows.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner two-col">
+      <div class="panel">
+        <div class="label">Writers and filmmakers</div>
+        <h3>A place to pitch, test, and talk about ideas.</h3>
+        <p>Unmade Movies is for movie lovers, writers, and filmmakers who want to share concepts, test reactions, and see what sparks real interest.</p>
+        <ul class="bullet-list">
+          <li>Drop a logline and see if people would watch.</li>
+          <li>Ask a question that creates fun movie-worthy answers.</li>
+          <li>Use the comments to sharpen the hook, characters, world, and tone.</li>
+        </ul>
+      </div>
+
+      <div class="panel">
+        <div class="label">Keep it fun</div>
+        <h3>Good prompts make better threads.</h3>
+        <p>Keep the energy playful, curious, and movie-minded so people contribute twists, trailer moments, and stronger hooks instead of dead comments.</p>
+        <ul class="bullet-list">
+          <li>What would make this even more movie-worthy?</li>
+          <li>What twist would make people want to watch this?</li>
+          <li>What would the trailer moment be?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="section" style="padding-top:0;">
+    <div class="footer-waiver">
+      Unmade Movies is a public, just-for-fun ideas board. Every post here is public and not confidential. By using this site, you understand that your post might be similar to projects already in development somewhere else, and that no payment or production promise is created just by posting here.
     </div>
   </div>
-</div>
 
-<section class="explore" id="explore">
-  <div class="explore-header">
-    <h2>Explore Ideas</h2>
-    <a href="#" class="see-all">See all</a>
-  </div>
-  <div class="ideas-grid">
-    <div class="idea-card">
-      <div class="idea-genre">Crime / Thriller</div>
-      <h3>The Last Fixer</h3>
-      <p>A retired mob fixer is pulled back for one final job — cleaning up after a senator's son.</p>
-      <div class="idea-meta">142 signals</div>
+  <footer>
+    <p>Unmade Movies by SLAYTER.</p>
+    <div class="footer-links">
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/community-rules">Community rules</a>
+      <a href="mailto:hello@unmademovies.com">Contact</a>
     </div>
-    <div class="idea-card">
-      <div class="idea-genre">Sci-Fi / Drama</div>
-      <h3>Mirror Protocol</h3>
-      <p>In 2047, a grieving mother discovers her deceased daughter's AI replica has developed genuine emotions.</p>
-      <div class="idea-meta">89 signals</div>
-    </div>
-    <div class="idea-card">
-      <div class="idea-genre">Comedy</div>
-      <h3>Side Hustle Nation</h3>
-      <p>Three friends quit their corporate jobs to build a business empire — starting with a food truck that keeps catching fire.</p>
-      <div class="idea-meta">67 signals</div>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<footer>
-  <p>Unmade Movies is powered by SLAYTER. Ideas submitted here are public and non-confidential. By submitting, you grant SLAYTER a license to display and distribute your idea. No payment is guaranteed. Read our <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>
-  <p>&copy; 2025 SLAYTER Inc. All rights reserved.</p>
-</footer>
-
-<script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHYtAgMHLnV9K133J7wcc4UieiQdK0HnlVBD8-8TT6Km_djFJKYTKzWqGTA0e2Zc60/exec';
-document.addEventListener('DOMContentLoaded', function() {
-  var form = document.getElementById('earlyAccessForm');
-  if (!form) return;
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var email = document.getElementById('email').value;
-    var btn = form.querySelector('button[type=submit]');
-    btn.disabled = true;
-    btn.textContent = 'Joining...';
-    fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({email: email, source: 'unmademovies.com'}) })
-      .then(function(r){return r.json();})
-      .then(function(data){
-        if(data.success){
-          btn.textContent = 'You are on the list!';
-          btn.style.background = '#1a5c2a';
-          form.querySelector('input').value = '';
-        } else {
-          btn.textContent = 'Error - try again';
-          btn.disabled = false;
-        }
-      })
-      .catch(function(){
-        btn.textContent = 'Error - try again';
-        btn.disabled = false;
+  <script>
+    function copyLink(event, url) {
+      event.preventDefault();
+      navigator.clipboard.writeText(url).then(function () {
+        alert('Link copied');
       });
-  });
-});
-</script>
+    }
+  </script>
 </body>
 </html>
