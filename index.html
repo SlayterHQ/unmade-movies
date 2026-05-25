@@ -566,27 +566,27 @@
 
         <form class="thread-form">
           <div class="row">
-            <input type="text" placeholder="Your name" aria-label="Your name">
-            <input type="email" placeholder="your@email.com" aria-label="Email address">
+            <input type="text" id="thread-name" placeholder="Your name" aria-label="Your name">
+            <input type="email" id="thread-email" placeholder="your@email.com" aria-label="Email address">
           </div>
 
           <div class="row">
-            <input type="text" placeholder="Thread title" aria-label="Thread title">
-            <select aria-label="Thread type">
+            <input type="text" id="thread-title" placeholder="Thread title" aria-label="Thread title">
+            <select id="thread-type" aria-label="Thread type">
               <option>Idea thread</option>
               <option>Question thread</option>
             </select>
           </div>
 
           <div class="row">
-            <input type="text" placeholder="Genre or vibe" aria-label="Genre or vibe">
-            <input type="text" placeholder="Optional trailer line" aria-label="Optional trailer line">
+            <input type="text" id="thread-genre" placeholder="Genre or vibe" aria-label="Genre or vibe">
+            <input type="text" id="thread-trailer" placeholder="Optional trailer line" aria-label="Optional trailer line">
           </div>
 
-          <textarea placeholder="Write your idea, or ask a question people can answer with their own movie-worthy takes." aria-label="Thread details"></textarea>
+          <textarea placeholder="id="thread-body" placeholder="Write your idea, or ask a question people can answer with their own movie-worthy takes."" aria-label="Thread details"></textarea>
 
           <label class="checkbox-row">
-            <input type="checkbox">
+            <input id="thread-agree" type="checkbox">
             <span>By ticking this box and posting, I agree that my post is public and not confidential, I have the right to post it, Unmade Movies may display, share and adapt it as part of the site, and I won’t expect payment or credit if something similar ever becomes a film, show, or other project.</span>
           </label>
 
@@ -750,6 +750,46 @@
         alert('Link copied');
       });
     }
+  </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+    const SUPABASE_URL = 'https://tmtqdertzljxjnpglsdf.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtdHFkZXJ0emxqeGpucGdsc2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5Mjg5ODcsImV4cCI6MjA5NDUwNDk4N30.PlX74VIaPixfFUSGockqQGBjbo8SOh8cpXTfvCDkVeY';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { db: { schema: 'unmademovies' } });
+
+    document.getElementById('post-thread-btn').addEventListener('click', async function(e) {
+      e.preventDefault();
+      const btn = this;
+      const name = document.getElementById('thread-name').value.trim();
+      const email = document.getElementById('thread-email').value.trim();
+      const title = document.getElementById('thread-title').value.trim();
+      const thread_type = document.getElementById('thread-type').value;
+      const genre = document.getElementById('thread-genre').value.trim();
+      const trailer_line = document.getElementById('thread-trailer').value.trim();
+      const body = document.getElementById('thread-body').value.trim();
+      const agreed = document.getElementById('thread-agree').checked;
+      if (!name || !email || !title || !body) { alert('Please fill in your name, email, title, and thread body.'); return; }
+      if (!agreed) { alert('Please agree to the submission terms before posting.'); return; }
+      btn.disabled = true;
+      btn.textContent = 'Posting...';
+      const { error } = await sb.from('threads').insert({ name, email, title, thread_type, genre, trailer_line, body, agreed_to_terms: agreed });
+      if (error) {
+        alert('Something went wrong: ' + error.message);
+        btn.disabled = false;
+        btn.textContent = 'Post Thread';
+      } else {
+        btn.textContent = 'Thread Posted!';
+        btn.style.background = 'linear-gradient(135deg,#00c9a7,#00875a)';
+        document.getElementById('thread-name').value = '';
+        document.getElementById('thread-email').value = '';
+        document.getElementById('thread-title').value = '';
+        document.getElementById('thread-genre').value = '';
+        document.getElementById('thread-trailer').value = '';
+        document.getElementById('thread-body').value = '';
+        document.getElementById('thread-agree').checked = false;
+        setTimeout(() => { btn.disabled = false; btn.textContent = 'Post Thread'; btn.style.background = ''; }, 4000);
+      }
+    });
   </script>
 </body>
 </html>
