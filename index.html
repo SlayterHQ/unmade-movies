@@ -6,11 +6,12 @@
   <title>Unmade Movies — Some ideas should be movies.</title>
   <meta name="description" content="A public community board for movie-worthy ideas, prompts, and conversation." />
   <meta property="og:title" content="Unmade Movies — Some ideas should be movies." />
-  <meta property="og:description" content="Start with an idea or a question. Explore movie-worthy threads, post your own, and follow the ones you care about." />
+  <meta property="og:description" content="Start with an idea or a question. Explore movie-worthy threads, writers, and creators." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -24,7 +25,6 @@
     }
     a{text-decoration:none;color:inherit}
     button,input,select,textarea{font:inherit}
-
     nav{
       position:sticky;
       top:0;
@@ -78,7 +78,6 @@
       white-space:nowrap;
     }
     .nav-cta:hover{opacity:.9;transform:translateY(-1px)}
-
     .hero-wrapper{
       background:
         radial-gradient(ellipse 75% 55% at 0% 0%, rgba(228,5,130,0.18), transparent 60%),
@@ -263,227 +262,12 @@
       color:#666;
       margin-top:2px;
     }
-
     .section{
       padding:64px 40px;
     }
     .section-inner{
       max-width:1200px;
       margin:0 auto;
-    }
-    .section-head{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:28px;
-    }
-    .section-head h2{
-      font-family:'Playfair Display',serif;
-      font-size:40px;
-      line-height:1;
-    }
-    .section-head p{
-      color:#888;
-      max-width:58ch;
-      font-size:15px;
-    }
-    .see-all{
-      font-size:14px;
-      color:#e40582;
-      font-weight:700;
-      white-space:nowrap;
-    }
-
-    .explore{background:#050505}
-    .sort-bar{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-bottom:22px;
-    }
-    .sort-btn{
-      background:#111;
-      border:1px solid #262626;
-      border-radius:999px;
-      padding:8px 15px;
-      font-size:13px;
-      color:#888;
-      cursor:pointer;
-      transition:all .2s ease;
-    }
-    .sort-btn.active,.sort-btn:hover{
-      background:rgba(228,5,130,0.12);
-      border-color:#e40582;
-      color:#e40582;
-    }
-    .ideas-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:24px;
-    }
-    .idea-card{
-      background:#111;
-      border:1px solid #222;
-      border-radius:18px;
-      padding:22px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      transition:border-color .2s ease,transform .2s ease;
-    }
-    .idea-card:hover{
-      border-color:#e40582;
-      transform:translateY(-2px);
-    }
-    .idea-tags{display:flex;gap:8px;flex-wrap:wrap}
-    .idea-tag{
-      display:inline-flex;
-      align-items:center;
-      padding:5px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:1px;
-      text-transform:uppercase;
-      background:rgba(228,5,130,0.12);
-      color:#e40582;
-      border:1px solid rgba(228,5,130,0.22);
-    }
-    .idea-tag.alt{
-      background:rgba(74,158,255,0.1);
-      color:#6cabff;
-      border-color:rgba(74,158,255,0.22);
-    }
-    .idea-card h3{
-      font-family:'Playfair Display',serif;
-      font-size:24px;
-      line-height:1.2;
-      margin:0;
-    }
-    .idea-card p{
-      font-size:14px;
-      color:#8f8f95;
-      line-height:1.7;
-      flex:1;
-    }
-    .idea-meta{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      border-top:1px solid #222;
-      padding-top:12px;
-      color:#666;
-      font-size:12px;
-      flex-wrap:wrap;
-    }
-    .share-link{
-      color:#e40582;
-      font-weight:700;
-      cursor:pointer;
-    }
-
-    .two-col{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:28px;
-    }
-    .panel{
-      background:#111;
-      border:1px solid #222;
-      border-radius:20px;
-      padding:28px;
-    }
-    .panel .label{
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      color:#e40582;
-      margin-bottom:10px;
-    }
-    .panel h3{
-      font-family:'Playfair Display',serif;
-      font-size:30px;
-      line-height:1.08;
-      margin-bottom:12px;
-    }
-    .panel p{
-      font-size:15px;
-      color:#888;
-      line-height:1.7;
-      margin-bottom:18px;
-    }
-    .bullet-list{
-      list-style:none;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .bullet-list li{
-      background:#151515;
-      border:1px solid #242424;
-      border-radius:14px;
-      padding:14px 16px;
-      font-size:14px;
-      color:#d4d4d8;
-      line-height:1.6;
-    }
-
-    .prompt-week{background:#080808}
-    .potw-card{
-      max-width:1200px;
-      margin:0 auto;
-      background:linear-gradient(135deg,#1a0010,#0d0d0d);
-      border:1px solid rgba(228,5,130,0.28);
-      border-radius:24px;
-      padding:40px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:30px;
-    }
-    .potw-label{
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:2px;
-      text-transform:uppercase;
-      color:#e40582;
-      margin-bottom:12px;
-    }
-    .potw-card h2{
-      font-family:'Playfair Display',serif;
-      font-size:32px;
-      line-height:1.1;
-      margin-bottom:8px;
-    }
-    .potw-card p{
-      color:#8f8f95;
-      font-size:15px;
-    }
-    .potw-btn{
-      background:linear-gradient(135deg,#ff6b2b,#e40582);
-      color:#fff;
-      padding:14px 26px;
-      border-radius:999px;
-      font-size:15px;
-      font-weight:700;
-      border:none;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-
-    .footer-waiver{
-      max-width:1200px;
-      margin:0 auto;
-      padding:20px 24px;
-      border:1px solid rgba(228,5,130,0.18);
-      background:rgba(228,5,130,0.06);
-      color:#a1a1aa;
-      border-radius:18px;
-      font-size:13px;
-      line-height:1.75;
     }
     footer{
       padding:40px;
@@ -507,16 +291,12 @@
       flex-wrap:wrap;
     }
     footer a{color:#e40582}
-
     @media(max-width:980px){
       .hero,
-      .two-col,
       .thread-form .row{
         grid-template-columns:1fr;
       }
       .hero h1{font-size:56px}
-      .section-head{flex-direction:column;align-items:flex-start}
-      .potw-card{flex-direction:column;align-items:flex-start}
     }
     @media(max-width:768px){
       nav{padding:16px 20px}
@@ -524,273 +304,153 @@
       .hero{padding:68px 20px 48px}
       .section{padding:52px 20px}
       .hero h1{font-size:42px}
-      .potw-card{padding:28px}
       footer{padding:32px 20px}
-      .footer-waiver{margin:0 20px}
     }
   </style>
 </head>
 <body>
-<p class="hero-sub">We believe that movies are for everyone—that they are how we share stories, explore new perspectives, and learn about life. Underneath it all, we are all the same. Have you ever thought "that should be a movie!"? Well, now there's a home for that thought. This is a space for the exploration of ideas, mostly just for fun.</p>    <a href="/" class="nav-logo">Unmade Movies <span>by SLAYTER</span></a>
-    <div class="nav-links">
-<li>Storytelling was traditionally done around a campfire, but now we have the internet.</li>
-<li>Everyone has a story, and anyone from anywhere can have an idea.</li>
-<p>Unmade Movies is a public, just-for-fun community board. We believe that stories are the campfire of the internet, and that every life has at least one movie in it. This is a home for exploring ideas, testing reactions, and sharing the perspectives that make us human.</p>      <a href="#account">Track</a>
-      <a href="#about">About</a>
-    </div>
-<a href="/terms">Terms</a>
-<a href="/privacy">Privacy</a>
-<a href="/community-rules">Community rules</a>  </nav>
 
-  <div class="hero-wrapper">
-    <section class="hero">
-      <div class="hero-left">
-        <span class="hero-badge">Community</span>
-        <h1>Some ideas <em>should be movies.</em></h1>
-        <p class="hero-sub">Start with your own movie idea, or drop a prompt question everyone can answer. Explore what other people have posted, join the conversation, and follow the threads you want to track.</p>
-        <ul class="hero-points">
-          <li>Post an idea or a question in under a minute.</li>
-          <li>Browse fun, movie-worthy threads from other people.</li>
-          <li>Create an account to follow and track the ones you care about.</li>
-        </ul>
-        <div class="hero-actions">
-          <a class="hero-btn primary" href="#submit">Start a Thread</a>
-          <a class="hero-btn secondary" href="#explore">Explore Ideas</a>
-        </div>
-      </div>
-
-      <div class="hero-form-card" id="submit">
-        <div class="eyebrow">Start a movie thread</div>
-        <h2>Drop an idea or ask a question.</h2>
-        <p>Short, public, and easy. Writers, filmmakers, and movie lovers can use this to pitch, test, or spark conversation.</p>
-
-        <form class="thread-form">
-          <div class="row">
-            <input type="text" id="thread-name" placeholder="Your name" aria-label="Your name">
-            <input type="email" id="thread-email" placeholder="your@email.com" aria-label="Email address">
-          </div>
-
-          <div class="row">
-            <input type="text" id="thread-title" placeholder="Thread title" aria-label="Thread title">
-            <select id="thread-type" aria-label="Thread type">
-              <option>Idea thread</option>
-              <option>Question thread</option>
-            </select>
-          </div>
-
-          <div class="row">
-            <input type="text" id="thread-genre" placeholder="Genre or vibe" aria-label="Genre or vibe">
-            <input type="text" id="thread-trailer" placeholder="Optional trailer line" aria-label="Optional trailer line">
-          </div>
-
-          <textarea id="thread-body" placeholder="Write your idea, or ask a question people can answer with their own movie-worthy takes."" aria-label="Thread details"></textarea>
-
-          <label class="checkbox-row">
-            <input id="thread-agree" type="checkbox">
-            <span>By ticking this box and posting, I agree that my post is public and not confidential, I have the right to post it, Unmade Movies may display, share and adapt it as part of the site, and I won’t expect payment or credit if something similar ever becomes a film, show, or other project.</span>
-          </label>
-
-          <div class="form-actions">
-            <button id="post-thread-btn" class="hero-btn primary" type="button">Post Thread</button>
-            <a class="hero-btn secondary" href="#account">Create Account to Track It</a>
-          </div>
-
-          <div class="form-note">Create an account to follow your thread, get updates, and jump back into the conversation.</div>
-        </form>
-      </div>
-    </section>
+<nav>
+  <a href="/" class="nav-logo">Unmade Movies <span>by SLAYTER</span></a>
+  <div class="nav-links">
+    <a href="#account">Track</a>
+    <a href="#about">About</a>
   </div>
+</nav>
 
-  <section class="prompt-week">
-    <div class="potw-card">
-      <div>
-        <div class="potw-label">Prompt of the week</div>
-        <h2>What everyday job should be the basis of a thriller?</h2>
-        <p>Question threads are a fast way to get people participating even if they do not arrive with a fully formed idea.</p>
+<div class="hero-wrapper">
+  <div class="hero">
+    <div>
+      <div class="hero-badge">COMMUNITY</div>
+      <h1>Some ideas <em>should be movies.</em></h1>
+      <p class="hero-sub">Start with your own movie idea, or drop a prompt question everyone can answer. Explore what other people have posted, join the conversation, and follow the threads you want to track.</p>
+      <ul class="hero-points">
+        <li>Post an idea or a question in under a minute.</li>
+        <li>Browse fun, movie-worthy threads from other people.</li>
+        <li>Create an account to follow and track the ones you care about.</li>
+      </ul>
+      <div class="hero-actions">
+        <button class="hero-btn primary" onclick="document.getElementById('thread-title').scrollIntoView({behavior:'smooth'}); document.getElementById('thread-title').focus()">Start a Thread</button>
+        <button class="hero-btn secondary" onclick="alert('Browse feature coming soon!')">Explore Ideas</button>
       </div>
-      <button class="potw-btn" onclick="document.getElementById('submit').scrollIntoView({behavior:'smooth'})">Answer this Prompt</button>
     </div>
-  </section>
 
-  <section class="section explore" id="explore">
-    <div class="section-inner">
-      <div class="section-head">
-        <div>
-          <h2>Explore Ideas</h2>
-          <p>Browse the board, find concepts you love, and jump into the comments with the twist, hook, or character move that could make them even better.</p>
+    <div class="hero-form-card">
+      <div class="eyebrow">START A MOVIE THREAD</div>
+      <h2>Drop an idea or ask a question.</h2>
+      <p>Short, public, and easy. Writers, filmmakers, and movie lovers can use this to pitch, test, or spark conversation.</p>
+      <form class="thread-form" id="submit">
+        <div class="row">
+          <input type="text" id="thread-name" placeholder="Your name" aria-label="Your name">
+          <input type="email" id="thread-email" placeholder="your@email.com" aria-label="Email address">
         </div>
-        <a href="#" class="see-all">See all</a>
-      </div>
-
-      <div class="sort-bar">
-        <button class="sort-btn active">Trending</button>
-        <button class="sort-btn">Newest</button>
-        <button class="sort-btn">Question threads</button>
-        <button class="sort-btn">Idea threads</button>
-        <button class="sort-btn">Comedy</button>
-        <button class="sort-btn">Thriller</button>
-        <button class="sort-btn">Most discussed</button>
-      </div>
-
-      <div class="ideas-grid">
-        <article class="idea-card">
-          <div class="idea-tags">
-            <span class="idea-tag">Thriller</span>
-            <span class="idea-tag alt">Trending</span>
-          </div>
-          <h3>A grief-tech startup sells one final dream visit with the dead.</h3>
-          <p>People are debating whether it gets stronger as prestige sci-fi, dark drama, or a psychological thriller with a buried corporate secret.</p>
-          <div class="idea-meta">
-            <span>▲ 1,248 · 42 comments</span>
-            <a class="share-link" href="#" onclick="copyLink(event,'https://unmademovies.com/thread/grief-tech')">Share</a>
-          </div>
-        </article>
-
-        <article class="idea-card">
-          <div class="idea-tags">
-            <span class="idea-tag">Question</span>
-            <span class="idea-tag alt">Fun thread</span>
-          </div>
-          <h3>What everyday job should be the basis of a thriller?</h3>
-          <p>The answers keep spinning into fresh hooks: meter readers, wedding planners, cruise ship entertainers, night cleaners, and court transcribers.</p>
-          <div class="idea-meta">
-            <span>▲ 612 · 29 comments</span>
-            <a class="share-link" href="#" onclick="copyLink(event,'https://unmademovies.com/thread/everyday-job-thriller')">Share</a>
-          </div>
-        </article>
-
-        <article class="idea-card">
-          <div class="idea-tags">
-            <span class="idea-tag">Fantasy</span>
-            <span class="idea-tag alt">New</span>
-          </div>
-          <h3>A child discovers the lost-and-found box at school stores forgotten futures.</h3>
-          <p>People are already arguing over whether it should stay family-friendly or bend toward darker magical realism with bigger emotional stakes.</p>
-          <div class="idea-meta">
-            <span>▲ 301 · 11 comments</span>
-            <a class="share-link" href="#" onclick="copyLink(event,'https://unmademovies.com/thread/lost-and-found-futures')">Share</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="about">
-    <div class="section-inner two-col">
-      <div class="panel">
-        <div class="label">Two ways to start</div>
-        <h3>Post a concept or start a prompt.</h3>
-        <p>Give people two easy entry points so the site stays active whether they arrive with a full concept or just a fun question.</p>
-        <ul class="bullet-list">
-          <li><strong>Idea thread.</strong> Post a concept, hook, or half-formed premise and let people build on it.</li>
-          <li><strong>Question thread.</strong> Ask something that gets people imagining movies together.</li>
-          <li><strong>Best result.</strong> More conversation starters, more browsing, and more reasons for people to come back.</li>
-        </ul>
-      </div>
-
-      <div class="panel" id="account">
-        <div class="label">Follow and track ideas</div>
-        <h3>Create an account to keep up with your favourites.</h3>
-        <p>Log in or create an account to follow ideas, track your own thread, and get notified when new comments or reactions come in.</p>
-        <ul class="bullet-list">
-          <li>Follow your own thread after you post it.</li>
-          <li>Save interesting ideas to revisit later.</li>
-          <li>Get notified when the conversation grows.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-inner two-col">
-      <div class="panel">
-        <div class="label">Writers and filmmakers</div>
-        <h3>A place to pitch, test, and talk about ideas.</h3>
-        <p>Unmade Movies is for movie lovers, writers, and filmmakers who want to share concepts, test reactions, and see what sparks real interest.</p>
-        <ul class="bullet-list">
-          <li>Drop a logline and see if people would watch.</li>
-          <li>Ask a question that creates fun movie-worthy answers.</li>
-          <li>Use the comments to sharpen the hook, characters, world, and tone.</li>
-        </ul>
-      </div>
-
-      <div class="panel">
-        <div class="label">Keep it fun</div>
-        <h3>Good prompts make better threads.</h3>
-        <p>Keep the energy playful, curious, and movie-minded so people contribute twists, trailer moments, and stronger hooks instead of dead comments.</p>
-        <ul class="bullet-list">
-          <li>What would make this even more movie-worthy?</li>
-          <li>What twist would make people want to watch this?</li>
-          <li>What would the trailer moment be?</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <div class="section" style="padding-top:0;">
-    <div class="footer-waiver">
-      Unmade Movies is a public, just-for-fun ideas board. Every post here is public and not confidential. By using this site, you understand that your post might be similar to projects already in development somewhere else, and that no payment or production promise is created just by posting here.
+        <div class="row">
+          <input type="text" id="thread-title" placeholder="Thread title" aria-label="Thread title">
+          <select id="thread-type" aria-label="Thread type">
+            <option>Idea thread</option>
+            <option>Question thread</option>
+          </select>
+        </div>
+        <div class="row">
+          <input type="text" id="thread-genre" placeholder="Genre or vibe" aria-label="Genre or vibe">
+          <input type="text" id="thread-trailer" placeholder="Optional trailer line" aria-label="Optional trailer line">
+        </div>
+        <textarea id="thread-body" placeholder="Write your idea, or ask a question people can answer with their own movie-worthy takes." aria-label="Thread details"></textarea>
+        <div class="checkbox-row">
+          <input id="thread-agree" type="checkbox">
+          <label for="thread-agree">By ticking this box and posting, I agree that my post is public and not confidential, I have the right to post it, Unmade Movies may display, share and adapt it as part of the site, and I won't expect payment or credit if something similar ever becomes a film, show, or other project.</label>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="post-thread-btn" class="hero-btn primary">Post Thread</button>
+          <a href="#account" class="hero-btn secondary">Create Account to Track It</a>
+        </div>
+        <p class="form-note">Create an account to follow your thread, get updates, and jump back into the conversation.</p>
+      </form>
     </div>
   </div>
+</div>
 
-  <footer>
-    <p>Unmade Movies by SLAYTER.</p>
-    <div class="footer-links">
-      <a href="/terms">Terms</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/community-rules">Community rules</a>
-      <a href="mailto:hello@unmademovies.com">Contact</a>
-    </div>
-  </footer>
+<footer>
+  <p>Unmade Movies by SLAYTER.</p>
+  <div class="footer-links">
+    <a href="/terms">Terms</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/community-rules">Community rules</a>
+    <a href="mailto:hello@unmademovies.com">Contact</a>
+  </div>
+</footer>
 
-  <script>
-    function copyLink(event, url) {
-      event.preventDefault();
-      navigator.clipboard.writeText(url).then(function () {
-        alert('Link copied');
-      });
-    }
-  </script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-    const SUPABASE_URL = 'https://tmtqdertzljxjnpglsdf.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtdHFkZXJ0emxqeGpucGdsc2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5Mjg5ODcsImV4cCI6MjA5NDUwNDk4N30.PlX74VIaPixfFUSGockqQGBjbo8SOh8cpXTfvCDkVeY';
-    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { db: { schema: 'unmademovies' } });
+<script>
+function copyLink(event, url) {
+  event.preventDefault();
+  navigator.clipboard.writeText(url).then(function () {
+    alert('Link copied');
+  });
+}
 
-    document.getElementById('post-thread-btn').addEventListener('click', async function(e) {
-      e.preventDefault();
-      const btn = this;
-      const name = document.getElementById('thread-name').value.trim();
-      const email = document.getElementById('thread-email').value.trim();
-      const title = document.getElementById('thread-title').value.trim();
-      const thread_type = document.getElementById('thread-type').value;
-      const genre = document.getElementById('thread-genre').value.trim();
-      const trailer_line = document.getElementById('thread-trailer').value.trim();
-      const body = document.getElementById('thread-body').value.trim();
-      const agreed = document.getElementById('thread-agree').checked;
-      if (!name || !email || !title || !body) { alert('Please fill in your name, email, title, and thread body.'); return; }
-      if (!agreed) { alert('Please agree to the submission terms before posting.'); return; }
-      btn.disabled = true;
-      btn.textContent = 'Posting...';
-      const { error } = await sb.from('threads').insert({ name, email, title, thread_type, genre, trailer_line, body, agreed_to_terms: agreed });
-      if (error) {
-        alert('Something went wrong: ' + error.message);
-        btn.disabled = false;
-        btn.textContent = 'Post Thread';
-      } else {
-        btn.textContent = 'Thread Posted!';
-        btn.style.background = 'linear-gradient(135deg,#00c9a7,#00875a)';
-        document.getElementById('thread-name').value = '';
-        document.getElementById('thread-email').value = '';
-        document.getElementById('thread-title').value = '';
-        document.getElementById('thread-genre').value = '';
-        docume
-          <script src="/seed-data.js"></script>nt.getElementById('thread-trailer').value = '';
-        document.getElementById('thread-body').value = '';
-        document.getElementById('thread-agree').checked = false;
-        setTimeout(() => { btn.disabled = false; btn.textContent = 'Post Thread'; btn.style.background = ''; }, 4000);
-      }
-    });
-  </script>
+const SUPABASE_URL = 'https://tmtqdertzljxjnpglsdf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtdHFkZXJ0emxqeGpucGdsc2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg5Mjg5ODcsImV4cCI6MjA5NDUwNDk4N30.PlX74VIaPixfFUSGockqQGBjbo8SOh8cpXTfvCDkVeY';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { db: { schema: 'unmademovies' } });
+
+document.getElementById('post-thread-btn').addEventListener('click', async function(e) {
+  e.preventDefault();
+  const btn = this;
+  const name = document.getElementById('thread-name').value.trim();
+  const email = document.getElementById('thread-email').value.trim();
+  const title = document.getElementById('thread-title').value.trim();
+  const thread_type = document.getElementById('thread-type').value;
+  const genre = document.getElementById('thread-genre').value.trim();
+  const trailer_line = document.getElementById('thread-trailer').value.trim();
+  const body = document.getElementById('thread-body').value.trim();
+  const agreed = document.getElementById('thread-agree').checked;
+
+  if (!name || !email || !title || !body) {
+    alert('Please fill in your name, email, title, and thread body.');
+    return;
+  }
+  if (!agreed) {
+    alert('Please agree to the submission terms before posting.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Posting...';
+
+  const { error } = await sb.from('threads').insert({
+    name,
+    email,
+    title,
+    thread_type,
+    genre,
+    trailer_line,
+    body,
+    agreed_to_terms: agreed
+  });
+
+  if (error) {
+    alert('Something went wrong: ' + error.message);
+    btn.disabled = false;
+    btn.textContent = 'Post Thread';
+  } else {
+    btn.textContent = 'Thread Posted!';
+    btn.style.background = 'linear-gradient(135deg,#00c9a7,#00875a)';
+    document.getElementById('thread-name').value = '';
+    document.getElementById('thread-email').value = '';
+    document.getElementById('thread-title').value = '';
+    document.getElementById('thread-genre').value = '';
+    document.getElementById('thread-trailer').value = '';
+    document.getElementById('thread-body').value = '';
+    document.getElementById('thread-agree').checked = false;
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = 'Post Thread';
+      btn.style.background = '';
+    }, 4000);
+  }
+});
+</script>
+
+<script src="/seed-data.js"></script>
+
 </body>
 </html>
